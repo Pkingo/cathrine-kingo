@@ -3,7 +3,6 @@ import React from "react"
 import { Image } from "./Image"
 import { List } from "./List"
 import { Link } from "./Link"
-import { TextBlock } from "./TextBlock"
 import { Banner } from "./Banner"
 import { Footer } from "./Footer"
 import { Header } from "./Header"
@@ -19,7 +18,6 @@ const Components = {
   Image,
   List,
   Link,
-  text_block: TextBlock,
   Banner,
   grid: Grid,
   wrapper: Wrapper,
