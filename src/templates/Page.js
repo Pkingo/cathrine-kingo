@@ -7,7 +7,6 @@ import SbEditable from "storyblok-react"
 import { Seo } from "../components/Seo"
 
 const PageTemplate = ({ pageContext, location, ...rest }) => {
-  console.log({ pageContext, location, ...rest })
   const story = useStoryblok(pageContext.story, location)
 
   const components = story.content.body.map(blok => {
