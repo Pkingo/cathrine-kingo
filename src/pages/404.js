@@ -1,14 +1,23 @@
-import * as React from "react"
+import React from "react"
 
-import Layout from "../components/layout"
-import Seo from "../components/seo"
+import useStoryblok from "../../lib/storyblok"
+import DynamicComponent from "../components/DynamicComponent"
+import SbEditable from "storyblok-react"
 
-const NotFoundPage = () => (
-  <Layout>
-    <Seo title="404: Not found" />
-    <h1>404: Not Found</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
+const NotFoundPage = ({ location }) => {
+  let components = null
+  const story = useStoryblok(null, location)
 
+  if (story) {
+    components = story.content.body.map(blok => {
+      return <DynamicComponent blok={blok} key={blok._uid} />
+    })
+  }
+
+  return (
+    <SbEditable content={story ? story.content : false}>
+      {components}
+    </SbEditable>
+  )
+}
 export default NotFoundPage

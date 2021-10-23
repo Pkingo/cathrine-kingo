@@ -1,42 +1,26 @@
-import * as React from "react"
-import PropTypes from "prop-types"
+import React from "react"
+import SbEditable from "storyblok-react"
+import DynamicComponent from "./DynamicComponent"
 import { Link } from "gatsby"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
-)
+export const Header = ({ blok }) => {
+  const { content } = blok.reference
+  const components = content.links.map(blok => (
+    <li key={blok._uid}>
+      <DynamicComponent blok={blok} />
+    </li>
+  ))
 
-Header.propTypes = {
-  siteTitle: PropTypes.string,
+  return (
+    <SbEditable content={content}>
+      <nav className="flex justify-between py-2 px-8">
+        <div>
+          <Link className="text-2xl text-primary" to="/">
+            {content.brand}
+          </Link>
+        </div>
+        <ul className="flex gap-4 self-center">{components}</ul>
+      </nav>
+    </SbEditable>
+  )
 }
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
-
-export default Header
