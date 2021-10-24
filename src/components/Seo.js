@@ -1,8 +1,8 @@
 import React from "react"
-import { Helmet } from "react-helmet"
+import Helmet from "react-helmet"
 
 export const Seo = ({ location, description, keywords, image, title }) => (
-  <Helmet>
+  <Helmet htmlAttributes={{ lang: "da" }}>
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={location.href} />

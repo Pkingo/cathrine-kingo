@@ -22,23 +22,31 @@ export const Header = ({ blok }) => {
         <Link className="text-2xl text-primary hidden lg:block" to="/">
           {content.brand}
         </Link>
-        <button className="lg:hidden cursor-pointer" onClick={toggleMenu}>
+        <button
+          aria-label="Åben sidebar"
+          className="lg:hidden cursor-pointer"
+          onClick={toggleMenu}
+        >
           <MenuIcon />
         </button>
-        <ul
+        <div
           className={cx(
-            "flex gap-4 self-center absolute bg-white flex-col top-0 left-0  min-w-min w-1/2 p-4 h-screen z-10 transition-all",
-            "lg:static lg:h-auto lg:flex-row lg:p-0 lg:w-min",
+            "flex flex-col self-center absolute bg-white top-0 left-0  min-w-min w-1/2 p-4 h-screen z-10 transition-all",
+            "lg:static lg:h-auto lg:p-0 lg:w-min",
             {
               "-left-full": !isOpen,
             }
           )}
         >
-          <button onClick={toggleMenu} className="lg:hidden self-end">
+          <button
+            aria-label="Luk sidebar"
+            onClick={toggleMenu}
+            className="lg:hidden self-end"
+          >
             <CloseIcon />
           </button>
-          {components}
-        </ul>
+          <ul className="flex gap-4 flex-col lg:flex-row">{components}</ul>
+        </div>
       </nav>
     </SbEditable>
   )
