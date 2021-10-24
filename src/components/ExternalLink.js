@@ -1,12 +1,12 @@
 import React from "react"
 
-export const ExternalLink = ({ blok }) => {
+export const ExternalLink = ({ content }) => {
   const href =
-    blok.type === "email"
-      ? `mailto:${blok.link}`
-      : blok.type === "phone"
-      ? `tel:${blok.link}`
-      : blok.link
+    content.type === "email"
+      ? `mailto:${content.link}`
+      : content.type === "phone"
+      ? `tel:${content.link}`
+      : content.link
 
   return (
     <a
@@ -15,7 +15,7 @@ export const ExternalLink = ({ blok }) => {
       target="_blank"
       rel="noreferrer"
     >
-      {blok.text}
+      {content.text}
     </a>
   )
 }

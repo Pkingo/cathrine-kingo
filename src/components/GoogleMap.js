@@ -1,10 +1,10 @@
 import React from "react"
 
-export const GoogleMap = ({ blok }) => (
+export const GoogleMap = ({ content }) => (
   <iframe
-    src={blok.src}
+    src={content.src}
     className="border-0 w-full h-96"
     loading="lazy"
-    title={blok.title}
+    title={content.title}
   ></iframe>
 )

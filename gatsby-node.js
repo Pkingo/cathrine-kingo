@@ -11,13 +11,27 @@ exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise((resolve, reject) => {
-    const storyblokEntry = path.resolve("src/templates/Page.js")
+    const PAGE_TEMPLATE = path.resolve("src/templates/Page.js")
+    const GLOBAL_COMPONENT_TEMPLATE = path.resolve("src/templates/Global.js")
 
     resolve(
       graphql(`
         query PagesQuery {
           stories: allStoryblokEntry(
             filter: { field_component: { eq: "page" } }
+          ) {
+            edges {
+              node {
+                content
+                id
+                full_slug
+                name
+                slug
+              }
+            }
+          }
+          global: allStoryblokEntry(
+            filter: { field_component: { eq: "global" } }
           ) {
             edges {
               node {
@@ -36,28 +50,30 @@ exports.createPages = ({ graphql, actions }) => {
           reject(result.errors)
         }
 
-        const entries = result.data.stories.edges
+        const stories = result.data.stories.edges
 
-        entries.forEach(entry => {
-          if (entry.node.slug !== "home") {
-            const page = {
-              path: `/${entry.node.full_slug}`,
-              component: storyblokEntry,
-              context: {
-                story: entry.node,
-              },
-            }
-            createPage(page)
-          } else {
-            const page = {
-              path: "/",
-              component: storyblokEntry,
-              context: {
-                story: entry.node,
-              },
-            }
-            createPage(page)
+        stories.forEach(entry => {
+          const page = {
+            path: entry.node.slug !== "home" ? `/${entry.node.full_slug}` : "/",
+            component: PAGE_TEMPLATE,
+            context: {
+              story: entry.node,
+            },
           }
+          createPage(page)
+        })
+
+        const globalComponents = result.data.global.edges
+
+        globalComponents.forEach(entry => {
+          const page = {
+            path: `/${entry.node.full_slug}`,
+            component: GLOBAL_COMPONENT_TEMPLATE,
+            context: {
+              story: entry.node,
+            },
+          }
+          createPage(page)
         })
       })
     )

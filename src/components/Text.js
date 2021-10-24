@@ -1,13 +1,13 @@
 import React from "react"
 import cx from "classnames"
 
-export const Text = ({ blok }) => {
+export const Text = ({ content }) => {
   return (
     <p
       className={cx("whitespace-pre-line", {
-        "col-span-full": blok.isFullGridWidth,
+        "col-span-full": content.isFullGridWidth,
       })}
-      dangerouslySetInnerHTML={{ __html: blok.text }}
+      dangerouslySetInnerHTML={{ __html: content.text }}
     />
   )
 }

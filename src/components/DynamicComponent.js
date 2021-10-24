@@ -26,36 +26,28 @@ const Components = {
   line: line,
   external_link: ExternalLink,
   google_map: GoogleMap,
-}
-
-const GlobalReference = {
-  Footer,
-  Header,
+  footer: Footer,
+  header: Header,
 }
 
 const DynamicComponent = ({ blok }) => {
-  if (typeof Components[blok.component] !== "undefined") {
-    const Component = Components[blok.component]
+  const componentName =
+    blok.component === "global_reference" ? blok.reference.slug : blok.component
+  const content =
+    blok.component === "global_reference"
+      ? blok.reference.content.body[0]
+      : blok
+  if (typeof Components[componentName] !== "undefined") {
+    const Component = Components[componentName]
     return (
-      <SbEditable content={blok}>
-        <Component blok={blok} />
-      </SbEditable>
-    )
-  }
-  if (
-    blok.component === "global_reference" &&
-    GlobalReference[blok.reference.name]
-  ) {
-    const Component = GlobalReference[blok.reference.name]
-    return (
-      <SbEditable content={blok}>
-        <Component blok={blok} />
+      <SbEditable content={content}>
+        <Component content={content} />
       </SbEditable>
     )
   }
   return (
     <p>
-      The component <strong>{blok.component}</strong> has not been created yet
+      The component <strong>{componentName}</strong> has not been created yet
     </p>
   )
 }

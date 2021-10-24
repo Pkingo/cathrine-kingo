@@ -1,11 +1,11 @@
 import React from "react"
 import { Link as GatsbyLink } from "gatsby"
 
-export const Link = ({ blok }) => (
+export const Link = ({ content }) => (
   <GatsbyLink
     className="hover:underline text-primary"
-    to={`/${blok.Slug.cached_url === "home" ? "" : blok.Slug.cached_url}`}
+    to={`/${content.Slug.cached_url === "home" ? "" : content.Slug.cached_url}`}
   >
-    {blok.Text}
+    {content.Text}
   </GatsbyLink>
 )
