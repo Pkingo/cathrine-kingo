@@ -1,11 +1,15 @@
+require("dotenv").config({
+  path: `.env`,
+})
+
 module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
       resolve: "gatsby-source-storyblok",
       options: {
-        accessToken: "L5EPr4JRMBDm9WsgZ8rs7wtt",
-        version: "draft",
+        accessToken: process.env.STORYBLOK_ACCESS_KEY,
+        version: process.env.NODE_ENV === "production" ? "published" : "draft",
         resolveRelations: ["global_reference.reference"],
       },
     },
