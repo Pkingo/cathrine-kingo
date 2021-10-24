@@ -1,18 +1,20 @@
 import React from "react"
 import SbEditable from "storyblok-react"
 import Img from "gatsby-image"
-import { getFixedGatsbyImage } from "gatsby-storyblok-image"
+import { getFluidGatsbyImage } from "gatsby-storyblok-image"
 
 export const Image = ({ blok }) => {
-  const fluidProps = getFixedGatsbyImage(blok.image)
+  const fluidProps = getFluidGatsbyImage(blok.image)
   return (
     <SbEditable content={blok}>
-      <Img
-        className="mx-auto"
-        fixed={fluidProps}
-        alt={blok.image_alt}
-        title={blok.image_title}
-      />
+      <div>
+        <Img
+          className="mx-auto"
+          fluid={fluidProps}
+          alt={blok.image_alt}
+          title={blok.image_title}
+        />
+      </div>
     </SbEditable>
   )
 }
