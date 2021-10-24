@@ -7,7 +7,7 @@ export const Grid = ({ blok }) => {
   ))
   return (
     <div
-      className={`w-full lg:w-main self-center gap-4 py-4 grid lg:grid-cols-${blok.columns} px-4 lg:px-0`}
+      className={`w-full lg:w-main self-center gap-4 py-4 grid lg:grid-cols-2 px-4 lg:px-0`}
     >
       {components}
     </div>
